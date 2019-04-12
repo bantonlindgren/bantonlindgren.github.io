@@ -1,0 +1,99 @@
+<div class="container clearfix pb-5 mb-5 pt-5">
+
+  <div class="row pb-4">
+    <h4 class="pb-4 px-3">Death and Decay</h4>
+    <div class="col-sm-12">
+      <img src="assets/img/DnD/DnD.jpg" alt="Death and Decay" class="rounded img-fluid">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      
+      <div class="clearfix pb-5">
+        <div>
+          <p>​This is a scene I set up in Unreal Engine 4. My objective was to create a nice ambiance with shaders, particles and lighting to create an effect where everything dies as a the character gets close to it. In this project I wanted to play around with different ways in which to change the environment based on where the character was located. All 3D assets and textures are free resources (see credits at the bottom of the page).</p>
+        </div>
+      </div>
+
+      <div class="clearfix pb-5">
+        <img src="assets/img/DnD/WallFloorMaterial.jpg" alt="Wall and floor material" class="rounded float-right px-3 pb-2 responsive-image small-img">
+
+        <h4>Wall/ Floor shader</h4>
+        <p>One of the most prominent parts of the scene is the wall/ floor material. I used two noise textures that I panned in different directions which I then stepped in order to get the masks for the rifts.</p>
+
+        <p>At first I used regular 2D textures but they didn't blend well between the walls and the floor. So I switched it up to use 3D noise textures and sampled them at the world position instead of the UV coordinates to get a seamless transition between the models.</p>
+
+        <p>In order to only spawn the rifts around the players I set up a parameter collection that saves the player world position through a blueprint. I read this position in the shader and use it create a spheremask with a falloff around it that I multiply with the noise mask.</p>
+
+        <p>Finally I set the textures and tiling up to be parameterized so I could just create separate material instances for the walls and floor while using the same material.</p>
+      </div>
+
+      <div class="clearfix pb-5">
+        <img src="assets/img/DnD/Candles.jpg" alt="Candle flame particles" class="rounded float-left px-3 pb-2 responsive-image small-img">
+
+        <h4>Candle flame</h4>
+        <p>This is a particle system that utilized a candle flame texture. The material makes the flame sway back and forth a bit.</p>
+
+        <p>The system consists of two emitters, one for the flame and one for the smoke. In the candle blueprint I set up a sphere collider that reacts to the player pawn and sets the spawn rate of the emitters to enable the smoke and disable the flames when the character comes close (and vice versa when he leaves the trigger volume).</p>
+
+      </div>
+
+      <div class="clearfix pb-5">
+        <img src="assets/img/DnD/Fruit.jpg" alt="Molding fruit shader" class="rounded float-right px-3 pb-2 responsive-image small-img">
+
+        <h4>Molding fruit</h4>
+        <p>Similar to the walls and floor I set up a spheremask with a falloff from the character position to the fruits to make it appear more and more moldy as the character gets closer to it.</p>
+
+        <p>I set up two parameterized colors for the moldy state. One base color and one for the spots. I lerp between them with a cloud texture and further I use the spheremask to lerp between the normal color and the mold color.</p>
+
+        <p>I push the vertices in towards the origin in the horizontal plane. In the Z axis I push the towards the bottom of the model with a vertical gradient as bias to push the top vertixes more than the bottom ones. I use the object bounds and position to calculate this gradient.</p>
+
+        <p>I also set up a particle system with flies that appear when the character gets close enough.</p>
+      </div>
+
+      <div class="clearfix pb-5">
+        <img src="assets/img/DnD/Flowers.jpg" alt="Withering flowers" class="rounded float-left px-3 pb-2 responsive-image small-img">
+
+        <h4>Withering flower</h4>
+        <p>Similar to the fruit I made a shader for withering flowers.</p>
+
+        <p>The colors are faded out when the character gets closer to them and there is a bit of vertex displacement based on a cloud texture to give it a more wrinkled appearance.</p>
+      </div>
+
+      <div class="credits pt-2 pb-1">
+        <h1>Borrowed assets</h1>
+        <h2 class="credits-header">Models</h2>
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <ul>
+              <li><a href="https://www.turbosquid.com/3d-models/free-max-model-decor-candles/1111309" target="_blank">Candle</a></li>
+              <li><a href="https://www.turbosquid.com/3d-models/free-obj-model-rose-lightwave-petal/777691" target="_blank">Rose</a></li>
+              <li><a href="https://www.turbosquid.com/3d-models/free-max-model-vase/963988" target="_blank">Vase</a></li>
+              <li><a href="https://www.turbosquid.com/FullPreview/Index.cfm/ID/1086466" target="_blank">Banana</a></li>
+              <li><a href="https://www.turbosquid.com/FullPreview/Index.cfm/ID/699996" target="_blank">Pumpkin</a></li>
+              <li><a href="https://www.turbosquid.com/3d-models/free-decorative-table-wall-3d-model/444604" target="_blank">Table</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <h2 class="credits-header">Textures</h2>
+            <ul>
+              <li><a href="https://www.textures.com/download/wallpaperforties0062/19076?q=wallpaper" target="_blank">Wallpaper</a></li>
+              <li><a href="https://www.textures.com/download/3dscans0024/126738?q=floor" target="_blank">Floor</a></li>
+              <li><a href="https://www.textures.com/download/flames0001/14652?q=candle+light" target="_blank">Candle light</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <h2 class="credits-header">Misc</h2>
+            <ul>
+                <li><a href="https://www.unrealengine.com/marketplace/paragon-sevarog" target="_blank">Sevarog character</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div> 

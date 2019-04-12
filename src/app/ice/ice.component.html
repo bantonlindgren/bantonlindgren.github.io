@@ -1,0 +1,90 @@
+<div class="container pb-5 mb-5 pt-5">
+
+  <div class="row mb-4 px-3">
+    <div class="col-sm-12 video-container">
+      <iframe src="https://www.youtube.com/embed/QOKyXPZ1W0Q?autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" class="video px-3" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="px-3">
+      <h4>Freeze Effect</h4>
+      <p>I made a few frost themed effects for a <a href="http://jesperborjesson.com/Coop.html" target="_blank">co-op puzzle game</a> that Jesper Börjesson made for his portfolio. One of the characters has an ability to freeze things which the other character can then smash. This freeze ability is what I present here.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/Ice/LerpNodes.jpg" target="_blank"><img src="assets/img/Ice/LerpNodes.jpg" alt="Material lerp nodes" class="rounded float-right px-3 pb-2 responsive-image small-image"></a>
+    
+    <div class="px-3">
+      <h5>Layered materials</h5>
+
+      <p>The rock is built up with three layers of materials. To achieve this effect I created each layer as a material function, returning a MakeMaterialAttributes node. I then plugged the output from these three materials into a custom MaterialLerp function that blends the materials together (like a regular lerp but with an entire material).</p>
+
+      <p>The base material is the regular material that comes with the SM_Rock standard asset that I just converted to a material function. This material can be easily exchanged to whatever material is fitting for the model it is applied to.</p>
+
+      <p>Below I briefly go over the material setup for the remaining two material layers.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/Ice/IceMaterial.jpg" target="_blank"><img src="assets/img/Ice/IceMaterial.jpg" alt="Ice Material" class="rounded float-left px-3 pb-2 responsive-image small-image"></a>
+    
+    <div class="px-3">
+      <h5>Ice material</h5>
+
+      <p>I took a fair amount of inspiration from Daniel Thiger's <a href="https://www.artstation.com/artwork/zq5mw" target="_blank">substance designer graph</a> when creating my material.  With the textures from this graph I set up a material in Unreal Engine. I utilized the BumpOffset node to create three subsurface levels and give the ice a parallax effect, making it look more volumetric. </p>
+
+      <p>I gave the material a slight vertex offset in the direction of the normals to make it look like it’s growing as it freezes. Also when the normal map of the base layer is replaced with the more flat normals of the ice material it makes it look more like chunks of ice.</p>
+
+      <p>I went back and forth a lot between Unreal and Designer until I had something I was happy with. The biggest changes I made to the textures were to export them as grayscale masks instead of a colored albedo and that I made four different sets of albedo masks for the four layers.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/Ice/FrostMaterial.jpg" target="_blank"><img src="assets/img/Ice/FrostMaterial.jpg" alt="Frost Material" class="rounded float-right px-3 pb-2 responsive-image small-image"></a>
+    
+    <div class="px-3">
+      <h5>Frost material</h5>
+
+      <p>The frost material function is really straight forward. Its practically just a base color and flat normals with a low roughness value. When I lerp towards the frost materials in my master material I use a mask that I created in Substance Designer in order to give it a more frosty appearance instead of just having a flat color overlay.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/Ice/SphereMaskNodes.jpg" target="_blank"><img src="assets/img/Ice/SphereMaskNodes.jpg" alt="Sphere mask nodes" class="rounded float-left px-3 pb-2 responsive-image small-image"></a>
+    
+    <div class="px-3">
+      <h5>Freeze origin</h5>
+
+      <p>I use sphere mask nodes to control the origin of the freeze effect and the spreading of the ice and frost from that point.</p>
+
+      <p>The FreezeOrigin position along with a 0-1 FreezeTime multiplier are exposed as parameters that I set via a dynamic material instance in my blueprint to control the point of origin and the rate at which the object is frozen.</p>
+
+      <p>In the game the freeze origin is set by casting a ray from the point the ability is cast towards the object and taking the hit position.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/Ice/ParticleTextures.jpg" target="_blank"><img src="assets/img/Ice/ParticleTextures.jpg" alt="Particle textures" class="rounded float-right px-3 pb-2 responsive-image small-image"></a>
+    
+    <div class="px-3">
+      <h5>Particles</h5>
+
+      <p>The system is made up of four different emitters using the textures shown here.</p>
+
+      <p>The cloud texture is used to give the effect a solid core. The frost texture is the same as for the frost material and is used to make the frosty clouds. The wispy texture is just there for some extra flavor. Lastly the circular texture is what makes up the sparks (or snow, if you will).</p>
+    </div>
+  </div>
+
+</div>

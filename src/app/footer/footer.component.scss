@@ -1,0 +1,10 @@
+@import "../../styles.scss";
+
+i {
+    font-size: 1.6em;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: $body-color;
+}

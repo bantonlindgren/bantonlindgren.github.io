@@ -1,0 +1,20 @@
+<div class="container clearfix pb-5 mb-5 pt-5">
+  <img src="assets/img/Health_Thumbnail.gif" alt="Health shader" class="rounded float-right px-4 pb-4 responsive-image">
+
+  <h4>Health/ Resource shader</h4>
+  <p>Here is a project I made in my spare time and that would later be implemented in our second game project at The Game Assembly.</p>
+
+  <p>I used Diablo 3 shaders for reference. The resource shader is inspired by the monk spirit bar.</p>
+
+  <p>I was inspired to make this shader because I was just starting to learn HLSL and I saw it as a fun challenge to see if I could make a 3D looking sphere on a 2D plane.</p>
+
+  <img src="assets/img/Resource.gif" alt="Resource shader" class="rounded float-right py-4 px-4 pb-4 responsive-image">
+
+  <p>I made four different grayscale textures in Substance Designer that I packed into different channels of an RGBA texture so I only had to load one texture onto the graphics card.</p>
+
+  <p>Two of the texture channels are different noise textures that I used to create the flowing liquid in the globes. One channel contains the highlights on the globe surface. The last channel is just a black to white circular gradient to provide the shaded effect.</p>
+  
+  <p>I set the health bar content to pan at an angle of -23 degrees (same as earths rotation). The resource bar I am panning straight up since it will regenerate rapidly over time in the game and this will give a clear visual indication of this.</p>
+
+  <p>In order to make the content look more 3D I squished it together the farther away from the center it is.</p>
+</div>

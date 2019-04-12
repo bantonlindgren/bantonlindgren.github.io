@@ -1,0 +1,115 @@
+<div class="container pb-5 mb-5 pt-5">
+
+  <div class="row mb-4 px-3">
+    <div class="col-sm-12 video-container px-3">
+      <iframe src="https://www.youtube.com/embed/j2FhfF5RVBQ?autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" class="video px-3" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="px-3">
+      <h3>SWARM</h3>
+      <p>Swarm was the first group project I was involved in at The Game Assembly. It is a 3D shoot 'em up put together in a custom game engine (Jazz engine) written by the programmers in our group.</p>
+
+      <p>We did not have a particle system up and running in the engine by the end of the project so all of our effects are purely HLSL shaders. The content below show some shaders I wrote for the game.</p>
+
+      <p>I must also preface this by saying that I cannot take credit for any of the models below, our graphics team created those - I just wrote the shaders.</p>
+
+      <p>In addition to the shaders I put a significant amount of time into the tools that are described under <a routerLink="../tools">their own page.</a></p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/swarm/swarm_enemyEggs.gif" target="_blank"><img src="assets/img/swarm/swarm_enemyEggs.gif" alt="Enemy eggs shader" class="rounded float-left px-3 pb-2 responsive-image"></a>
+
+    <div class="px-3">
+      <h4>Enemy egg shader</h4>
+      <p>This is a shader for the eggs that are attached to our enemy ships. We wanted to give the mechanical ships a more living aspect to contrast it.</p>
+
+      <p>The vertex shader is just pushing the vertices out along their normals. I vertex painted the model in maya in order to mask out vertices I wanted to move more or less than the others.</p>
+
+      <p>For the pixel shader I used a couple of different panning noise masks that I multiplied together to make it look a bit more organic.</p>
+
+      <p>To gain some contrast between the eggs with the lack of shadows and ambient occlusion I wrote a fresnel function that highlights areas of the eggs. I also used my vertex colors to darken the areas between the eggs - essentially working as an AO mask.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/swarm/swarm_centerPillar.gif" target="_blank"><img src="assets/img/swarm/swarm_centerPillar.gif" alt="Center pillar shader" class="rounded float-right px-3 pb-2 responsive-image"></a>
+
+    <div class="px-3">
+      <h4>Hive pillar shader</h4>
+      <p>This is the shader for the center pillar once the player enters the enemy hive in the last level.</p>
+
+      <p>Since we wanted this to fit thematically with the enemy eggs much of that shader could be reused. Rather than scaling the whole model uniformly I made it a few pulses going from the bottom to the top. I also set up a couple of parameters that could easily be used to tweak the number of bulges and how fast things were moving.</p>
+
+      <p>The UV layout was setup with the pulsating part on the left half of the map so I could just mask that part out and ignore the rest for my shader operations.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/swarm/swarm_hiveCeiling.gif" target="_blank"><img src="assets/img/swarm/swarm_hiveCeiling.gif" alt="Center pillar shader" class="rounded float-left px-3 pb-2 responsive-image"></a>
+
+    <div class="px-3">
+      <h4>Hive ceiling shader</h4>
+      <p>This is the ceiling of the hive (and the floor). The tubes are pumping into the big center pillar previously displayed.</p>
+
+      <p>The shader works much in the same way as the center pillar. In order to make the pulses run with the tubes they were all aligned vertically in the UV map. They were also kept to one side so they could be easily masked out (props to the graphics team who set up great UVs, in addition to their killer models).</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/swarm/swarm_mine.gif" target="_blank"><img src="assets/img/swarm/swarm_mine.gif" alt="Mine shader" class="rounded float-right px-3 pb-2 responsive-image"></a>
+
+    <div class="px-3">
+      <h4>Mine shader</h4>
+      <p>The same principles were used to create this shader as the aforementioned shaders. Some things had to be tweaked to fit the particular model.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/swarm/swarm_banners.gif" target="_blank"><img src="assets/img/swarm/swarm_banners.gif" alt="Banner shader" class="rounded float-left px-3 pb-2 responsive-image"></a>
+
+    <div class="px-3">
+      <h4>Banner shader</h4>
+      <p>I created a shader for the banners on the side of the walls to make the scene look a bit more dynamic.</p>
+
+      <p>I just combined some sine waves to create the movement. I also made them more prominent towards the bottom of the flag.</p>
+
+      <p>To give it an extra touch i created a gradial mask at the bottom of the flag with vertex colors and used this to apply some extra movement that was a bit offset in time - making the bottom lag behind a little.</p>
+
+      <p>Finally I offset the time slightly based on the flag's world position so it looks like the wind hits one flag and then slightly later it hits the next flag.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/swarm/swarm_playerHit.gif" target="_blank"><img src="assets/img/swarm/swarm_playerHit.gif" alt="Player hit fullscreen shader" class="rounded float-right px-3 pb-2 responsive-image"></a>
+
+    <div class="px-3">
+      <h4>Player hit fullscreen shader</h4>
+      <p>This shader is played whenever the player is hit.</p>
+
+      <p>The effect is made up of 4 different components. First there is the big red flashing vignette to signify that something undesirable happened.</p>
+
+      <p>There is a big vertical jitter to emulate a camera shake and give you the feeling that your ship has been hit by something.</p>
+
+      <p>There is also a much more granular horizontal jitter that gives a more technological feeling and kind of makes it feel like you're looking at a failing monitor. This component also ties in really well with the sound effect that is played when the player is hit.</p>
+
+      <p>Finally there is a hint of chromatic aberration just for some extra flavor.</p>
+    </div>
+  </div>
+
+
+</div>

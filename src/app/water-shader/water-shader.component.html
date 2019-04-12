@@ -1,0 +1,77 @@
+<div class="container pb-5 mb-5 pt-5">
+
+  <div class="row mb-4 px-3">
+    <div class="col-sm-12 video-container">
+      <iframe src="https://www.youtube.com/embed/VwFPJOOeP-E?autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" class="video px-3" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="px-3 pt4">
+      <h4>Ocean Shader</h4>
+
+      <p>I wanted to make a cool shader for my portfolio and I thought to myself "water is pretty cool". So naturally I made a water shader!</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+      <a href="assets/img/Ocean/OceanWireframe.gif" target="_blank"><img src="assets/img/Ocean/OceanWireframe.gif" alt="Ocean wireframe" class="rounded float-right px-3 pb-2 responsive-image"></a>
+      <a href="assets/img/Ocean/GerstnerFunction.PNG" target="_blank"><img src="assets/img/Ocean/GerstnerFunction.PNG" alt="Gerstner wave function" class="rounded float-right px-3 pb-2 pt-3 responsive-image"></a>
+
+      <div class="px-3">
+        <h5>Gerstner waves</h5>
+
+        <p>A big part of this exercise was obviously to make convincing waves. There is a <a href="http://developer.download.nvidia.com/books/HTML/gpugems/gpugems_ch01.html" target="_blank">GPU Gems article</a> on water simulation and how to create Gerstner waves. From this article I extracted the Gerstner wave function that I included here.</p>
+
+        <p>A basic way of simulating water is to just make a set of sine waves that are panning in different directions and adding them together to create vertical movement.</p>
+          
+        <p>With the gerstner function however you also push the vertices horizontally towards the crests. This makes the peaks sharper and it gives them higher resolution where it is needed.</p>
+
+        <p>As the functions for calculating x and y movement is identical but for the D.x and D.y factors I get away with making this entire calculation once for every wave and then just multiplying the result with the unique terms at the end.</p>
+
+        <p>To get enough variation while still keeping the cost reasonable I sample 8 waves with different sets of parameters. I also give each wave a life time that I use to fade it in and out with a sine curve in order to make the patterns less repetitive.</p>
+
+        <p>To make the surface less flat I also add a set of tinier waves that are calculated in the same way as the big waves.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/Ocean/SeaNormalsTexture.jpg" target="_blank"><img src="assets/img/Ocean/SeaNormalsTexture.jpg" alt="Ocean normals" class="rounded float-left px-3 pb-2 responsive-image"></a>
+    <div class="px-3">
+      <h5>Surface normals</h5>
+
+      <p>For my surface normals I took a texture from <a href="https://www.textures.com/download/waterfoam0006/8936?q=foam" target="blank">textures.com</a>. I opened it in photoshop and made it grayscale and tileable and then I generated the normals with crazybump.</p>
+
+      <p>I sample the normals three times with different tiling, direction and speed along with a cloud mask to break up the pattern and give some interesting contrasts in the reflections.</p>
+
+      <p>I combine these textures with a series of lerps. After they are combined I use a custom written function to control the intensity and steepness of the normals.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <a href="assets/img/Ocean/PeakHighlights.gif" target="_blank"><img src="assets/img/Ocean/PeakHighlights.gif" alt="Peak highlights" class="rounded float-right px-3 pb-2 responsive-image"></a>
+
+    <div class="px-3">
+      <h5>Peak highlights</h5>
+
+      <p>I wanted to give the peaks of the waves a lighter color in order to simulate light coming through them. In order to identify the peaks I return the height of every wave I sample and divide it by it’s amplitude to get an unweighted value. I then calculate the average to get a value indicating the wave height. This gives me a handy 0-1 value that I can use to lerp between my base color and the highlighted color.</p>
+    </div>
+  </div>
+
+  <hr class="mx-3">
+
+  <div class="clearfix">
+    <div class="px-3 pt-4">
+      <h5>Tessellation</h5>
+
+      <p>The plane itself is made up of roughly 2500 triangles. This is then tesselated in Unreal to get a desirable amount of detail. The tesselation multiplier is exposed as a parameter so it can easily be manipulated to higher resolution closer to the camera where it is most needed.</p>
+    </div>
+  </div>
+
+</div>
